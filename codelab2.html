@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation Sederhana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff; /* Latar belakang halaman putih */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #4CAF50; /* Latar belakang form hijau */
+            padding: 60px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #000;
+        }
+
+        h2 {
+            color: hitam; /* Warna teks pada judul form */
+        }
+
+        label {
+            color: hitam; /* Warna label teks menjadi putih */
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var nama = document.getElementById("nama").value;
+            var email = document.getElementById("email").value;
+            var alamat = document.getElementById("alamat").value;
+            var errorMessage = "";
+
+            // Validasi nama
+            if (nama == "") {
+                errorMessage += "Nama harus diisi.\n";
+            }
+
+            // Validasi email
+            if (email == "") {
+                errorMessage += "Email harus diisi.\n";
+            } else {
+                var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                if (!emailPattern.test(email)) {
+                    errorMessage += "Format email tidak valid.\n";
+                }
+            }
+
+            // Validasi alamat lengkap
+            if (alamat == "") {
+                errorMessage += "Alamat lengkap harus diisi.\n";
+            } else if (alamat.length < 10) {
+                errorMessage += "Alamat lengkap harus minimal 10 karakter.\n";
+            }
+
+            // Jika ada error, tampilkan alert dan jangan submit form
+            if (errorMessage != "") {
+                alert(errorMessage);
+                return false;
+            }
+
+            // Jika tidak ada error, form akan dikirim
+            return true;
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>Form Pendaftaran</h2>
+    <form onsubmit="return validateForm()">
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda">
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" placeholder="Masukkan email Anda">
+
+        <label for="alamat">Alamat Lengkap:</label>
+        <input type="text" id="alamat" name="alamat" placeholder="Masukkan alamat lengkap Anda">
+
+        <button type="submit">Daftar</button>
+    </form>
+</div>
+</body>
+</html>
